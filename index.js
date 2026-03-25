@@ -25,27 +25,6 @@ mongoose.connect(URI)
     console.log("Error connecting to mongo db", err);
 })
 
-cloudinary.config({
-    cloud_name: process.env.cloudName,
-    api_key: process.env.cloudApiKey,
-    api_secret: process.env.cloudApiSecret
-})
-
-
-
-const transporter = nodemailer.createTransport({
-    service:"gmail",
-    host: "smtp.gmail.com",
-    port: process.env.transporterPort,
-    secure: true,
-    auth: {
-        user: process.env.transporterUser,
-        pass: process.env.transporterPass,
-    },
-    tls: {
-        rejectUnauthorized: false 
-    }
-});
 
 const userCredSchema = new mongoose.Schema({
     firstName: {type:String},
@@ -138,21 +117,14 @@ app.post("/signup",(req, res)=>{
                     const removeOldOTP = allOTP.filter(cred => cred.mail != req.body.email)
                     removeOldOTP.push({mail: req.body.email, OTP})
                     allOTP = removeOldOTP;
-                    transporter.sendMail({
-                        from: `"Ethereal NotePad" <tilux001@gmail.com>`,
+                    resend.emails.send({
+                        from: 'onboarding@resend.dev',
                         to: req.body.email,
                         subject: "Hello from Ethereal",
-                        text: "This is a plain text emaTiluxil sent using Nodemailer.",
                         html: message
-                    })
-                    .then((output)=>{
-                        console.log("sent successfuly");
-                        res.status(201).json({message:"OTP sent successfully"})
-                    })
-                    .catch((error)=>{
-                        console.log(error);
-                        res.status(501).json({message:"error sending OTP", error})
-                    })
+                    });
+                    console.log("sent successfuly");
+                    res.status(201).json({message:"OTP sent successfully"})
                 })
                 .catch((error)=>{
                     console.log(error);
@@ -252,21 +224,14 @@ app.post("/resendOTP",(req, res)=>{
     const removeOldOTP = allOTP.filter(cred => cred.mail != req.body.email)
     removeOldOTP.push({mail: req.body.email, OTP})
     allOTP = removeOldOTP;
-    transporter.sendMail({
-        from: `"Ethereal NotePad" <tilux001@gmail.com>`,
+    resend.emails.send({
+        from: 'onboarding@resend.dev',
         to: req.body.email,
         subject: "Hello from Ethereal",
-        text: "This is a plain text emaTiluxil sent using Nodemailer.",
         html: message
-    })
-    .then((output)=>{
-        res.status(201).json({message:"OTP resend successful"})
-        console.log("sent successfuly");
-    })
-    .catch((error)=>{
-        res.status(501).json({message:"Error resending OTP"})
-        console.log(error);
-    })
+    });
+    console.log("sent successfuly");
+    res.status(201).json({message:"OTP sent successfully"})
 })
 
 
