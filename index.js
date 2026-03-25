@@ -35,9 +35,9 @@ cloudinary.config({
 
 const transporter = nodemailer.createTransport({
     service:"gmail",
-    host: "smtp.gmail.email",
+    host: "smtp.gmail.com",
     port: process.env.transporterPort,
-    secure: false,
+    secure: true,
     auth: {
         user: process.env.transporterUser,
         pass: process.env.transporterPass,
