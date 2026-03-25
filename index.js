@@ -15,7 +15,9 @@ const upload = multer({ dest: 'uploads/' })
 const fs = require ("fs")
 const util = require("util")
 const { type } = require("os")
+const { Resend } = require("resend")
 const readFile = util.promisify(fs.readFile);
+
 
 mongoose.connect(URI)
 .then((output)=>{
@@ -25,7 +27,7 @@ mongoose.connect(URI)
     console.log("Error connecting to mongo db", err);
 })
 
-
+const resend = new Resend('re_EHVQbSVH_FFMoaUK9wNyEFDYXnumv57Wn');
 const userCredSchema = new mongoose.Schema({
     firstName: {type:String},
     lastName: {type: String},
