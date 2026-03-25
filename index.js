@@ -37,11 +37,14 @@ const transporter = nodemailer.createTransport({
     service:"gmail",
     host: "smtp.gmail.email",
     port: process.env.transporterPort,
-    secure: true,
+    secure: false,
     auth: {
         user: process.env.transporterUser,
         pass: process.env.transporterPass,
     },
+    tls: {
+        rejectUnauthorized: false 
+    }
 });
 
 const userCredSchema = new mongoose.Schema({
