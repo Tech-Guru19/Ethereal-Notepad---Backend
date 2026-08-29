@@ -1,38 +1,48 @@
-# ⚙️ Ethereal Notepad — Backend API
+# Ethereal Notepad - Backend API
 
-The **Express + MongoDB backend** for Ethereal Notepad. Handles note storage, user data, media uploads (via Cloudinary), and transactional email.
+## Overview
 
-## ✨ Highlights
+The Express and MongoDB backend for Ethereal Notepad. The API handles note storage, user data management, media uploads through Cloudinary, and transactional email delivery.
 
-- 🗄️ **MongoDB with Mongoose** — flexible, schema-driven data storage
-- 🖼️ **Media upload pipeline** — Multer receives images → converted to base64 → uploaded to **Cloudinary** → secure URL returned
-- 📧 **Email automation** — Nodemailer + Resend for OTPs and notifications
-- 🔒 **CORS + env-based configuration** — clean, secure setup
+## Key Features
 
-## 🧱 Tech Stack
+- **MongoDB storage:** Schema-driven data persistence with Mongoose
+- **Media upload pipeline:** Multer receives images, converts them to base64, uploads to Cloudinary, and returns secure URLs
+- **Email automation:** Nodemailer and Resend for OTP and notification delivery
+- **Secure configuration:** CORS and environment-variable-based configuration
 
-- Node.js + Express 5
-- MongoDB + Mongoose 9
-- Multer
-- Cloudinary
-- Nodemailer & Resend
+## Technology Stack
 
-## 🚀 Getting Started
+- Node.js with Express 5
+- MongoDB with Mongoose 9
+- Multer (file uploads)
+- Cloudinary (media storage)
+- Nodemailer and Resend (email)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- MongoDB instance
+- Cloudinary account
+
+### Installation
 
 ```bash
 git clone https://github.com/Tech-Guru19/Ethereal-Notepad---Backend.git
 cd Ethereal-Notepad---Backend
 npm install
-# create .env with: PORT, URI (MongoDB), cloudName, cloudApiKey, cloudApiSecret
+# Create a .env file with: PORT, URI (MongoDB), cloudName, cloudApiKey, cloudApiSecret
 npm start
 ```
 
-## 🔌 Key Endpoints
+## API Endpoints
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| POST | `/uploadMedia` | Upload an image → returns Cloudinary URL |
+| POST | /uploadMedia | Upload an image and return a Cloudinary URL |
 
-## 👩‍💻 Author
+## Author
 
-**[Obiasogu Esther Chizaram](https://github.com/Tech-Guru19)**
+[Obiasogu Esther Chizaram](https://github.com/Tech-Guru19)
